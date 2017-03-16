@@ -1,0 +1,50 @@
+<header id="header" class="center">
+  <i class="fa fa-wifi circle-icon" aria-hidden="true"></i>
+  <h1 class="big-title">{{title + " (" + wifiPoints?.length + ")"}}</h1>
+  <p class="italic">"{{ quote }}"</p>
+</header>
+
+
+
+<div id="facebook-content" class="center">
+</div>
+
+
+
+<form class="filter-wrapper">
+  <div class="grid">
+  	<div class="row">
+        <div class="col-6 form-group">
+          <label for="gemeente">Filter op gemeente</label>
+          <input type="search" class="form-control" id="gemeente" [(ngModel)]="termGemeente" name="gemeente" placeholder="Antwerpen">
+        </div>
+        <div class="col-6 form-group">
+          <label for="postcode">Filter op postcode</label>
+          <input type="search" class="form-control" id="postcode" [(ngModel)]="termPostcode" name="postcode" placeholder="2000">
+        </div>
+      </div>
+  </div>  
+</form>
+
+
+<div class="grid grid-table">
+  <table id="tbl-wifipoints" class="table table-hover">
+  	<thead>
+  		<tr><th>#</th><th>Locatie</th><th>Straat</th><th>Huisnummer</th><th>Postcode</th><th>Gemeente</th></tr>
+  	</thead>
+  	<tbody>
+      <tr *ngFor="let wifiPoint of wifiPoints | gemeenteFilter:termGemeente | postcodeFilter:termPostcode; let i = index; trackBy: trackByFn">
+        <td>{{ i+1 }}</td>
+        <td>{{ wifiPoint.locatie }}</td>
+        <td>{{ wifiPoint.straat }}</td>
+        <td>{{ wifiPoint.huisnr }}</td>
+        <td>{{ wifiPoint.postcode }}</td>
+        <td>{{ wifiPoint.gemeente }}</td>
+      </tr>
+  	</tbody>
+  </table>
+</div>
+
+
+
+<google-maps [wifiPoints]="wifiPoints">Google Maps Card...</google-maps>

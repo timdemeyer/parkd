@@ -1,0 +1,25 @@
+<!-- 
+creates a google map on the page with the given lat/lng from 
+the component as the initial center of the map: 
+-->
+
+<sebm-google-map 
+  [latitude]="centerMapLat" 
+  [longitude]="centerMapLng"
+  [zoom]="zoom"
+  [zoomControl]="false"
+  [scrollwheel]="false">
+
+	<sebm-google-map-marker *ngFor="let m of wifiPoints; let i = index" 
+    [latitude]="m.point_lat" 
+    [longitude]="m.point_lng">
+    
+        <sebm-google-map-info-window>
+          <strong>{{ m.locatie }}</strong>
+          <p>{{ m.straat + " " + m.huisnr }}</p>
+          <p>{{ m.postcode + ", " + m.gemeente }}</p>
+        </sebm-google-map-info-window>
+
+  </sebm-google-map-marker>
+
+</sebm-google-map>
